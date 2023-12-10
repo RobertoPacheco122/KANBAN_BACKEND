@@ -1,0 +1,7 @@
+﻿/.vs
+/API/bin/Debug/net7.0
+/API/obj
+/Application/obj
+/Domain/obj
+/Infrastructure/obj
+/Test/obj
