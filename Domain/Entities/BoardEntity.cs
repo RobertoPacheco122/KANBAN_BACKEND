@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Entities {
-    public class Board : BaseEntity {
+    public class BoardEntity : BaseEntity {
         public string Name { get; set; } = string.Empty;
 
-        public List<List>? Lists { get; set; }
+        public List<ListEntity>? Lists { get; set; }
     }
 }

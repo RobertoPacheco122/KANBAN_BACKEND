@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Entities {
-    public class Subtask : BaseEntity {
-        public string? Description { get; set; }
+    public class SubtaskEntity : BaseEntity {
+        public string Description { get; set; } = string.Empty;
         public bool IsDone { get; set; } = false;
 
-        public int TaskItemId { get; set; }
-        public TaskItem? TaskItem { get; set; }
+        public Guid TaskId { get; set; }
+        public TaskEntity? Task { get; set; }
     }
 }
