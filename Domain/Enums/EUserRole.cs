@@ -5,9 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Enums {
-    public enum TaskPriority {
-        LowPriority = 1,
-        MidPriority = 2,
-        HighPriority = 3
+    public enum EUserRole {
+        Employee = 1,
+        Manager = 2,  
     }
 }
