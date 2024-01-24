@@ -23,7 +23,7 @@ namespace Infrastructure.Data.Repositories {
                 var entityInDatabase = await _dataset.FindAsync(id);
                 if (entityInDatabase == null) return false;
 
-                _dataset.Remove(entityInDatabase);
+                entityInDatabase.IsDeleted = true;
                 await _context.SaveChangesAsync();
 
                 return true;
@@ -50,9 +50,10 @@ namespace Infrastructure.Data.Repositories {
 
         public async Task<T> InsertAsync(T entity) {
             try {
+                entity.Id = Guid.NewGuid();
                 entity.CreationDate = DateTime.UtcNow;
-                _dataset.Add(entity);
 
+                _dataset.Add(entity);
                 await _context.SaveChangesAsync();
 
                 return entity;
