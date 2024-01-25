@@ -14,7 +14,7 @@ namespace Application.Services {
             _subtaskRepository = subtaskRepository;
         }
 
-        public async Task<bool> Delete(int id) {
+        public async Task<bool> Delete(Guid id) {
             return await _subtaskRepository.DeleteAsync(id);
         }
 
@@ -22,7 +22,7 @@ namespace Application.Services {
             return await _subtaskRepository.GetAllAsync();
         }
 
-        public async Task<SubtaskEntity> GetSingle(int id) {
+        public async Task<SubtaskEntity> GetSingle(Guid id) {
             return await _subtaskRepository.SelectAsync(id);
         }
 

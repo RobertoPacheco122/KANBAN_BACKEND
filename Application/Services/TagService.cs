@@ -14,7 +14,7 @@ namespace Application.Services {
             _tagRepository = tagRepository;
         }
 
-        public async Task<bool> Delete(int id) {
+        public async Task<bool> Delete(Guid id) {
             return await _tagRepository.DeleteAsync(id);
         }
 
@@ -22,7 +22,7 @@ namespace Application.Services {
             return await _tagRepository.GetAllAsync();
         }
 
-        public async Task<TagEntity> GetSingle(int id) {
+        public async Task<TagEntity> GetSingle(Guid id) {
             return await _tagRepository.SelectAsync(id);
         }
 
