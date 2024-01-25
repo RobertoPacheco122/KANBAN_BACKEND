@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces.Services {
     public interface IApplicationUserService {
-        Task<bool> Delete(int id);
+        Task<bool> Delete(Guid id);
         Task<List<ApplicationUserEntity>> GetAll();
-        Task<ApplicationUserEntity> GetSingle(int id);
+        Task<ApplicationUserEntity> GetSingle(Guid id);
         Task<ApplicationUserEntity> Insert(ApplicationUserEntity aluno);
         Task<ApplicationUserEntity> Update(ApplicationUserEntity aluno);
     }

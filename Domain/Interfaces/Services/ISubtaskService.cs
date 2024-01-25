@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces.Services {
     public interface ISubtaskService {
-        Task<bool> Delete(int id);
+        Task<bool> Delete(Guid id);
         Task<List<SubtaskEntity>> GetAll();
-        Task<SubtaskEntity> GetSingle(int id);
+        Task<SubtaskEntity> GetSingle(Guid id);
         Task<SubtaskEntity> Insert(SubtaskEntity subtask);
         Task<SubtaskEntity> Update(SubtaskEntity subtask);
     }
