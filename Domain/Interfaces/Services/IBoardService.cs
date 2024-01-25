@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces.Services {
     public interface IBoardService {
-        Task<bool> Delete(int id);
+        Task<bool> Delete(Guid id);
         Task<List<BoardEntity>> GetAll();
-        Task<BoardEntity> GetSingle(int id);
+        Task<BoardEntity> GetSingle(Guid id);
         Task<BoardEntity> Insert(BoardEntity board);
         Task<BoardEntity> Update(BoardEntity board);
     }

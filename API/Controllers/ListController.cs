@@ -24,7 +24,7 @@ namespace API.Controllers {
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ListEntity>> GetSingle(int id) {
+        public async Task<ActionResult<ListEntity>> GetSingle(Guid id) {
             try {
                 var response = await _listService.GetSingle(id);
 
@@ -60,7 +60,7 @@ namespace API.Controllers {
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<bool>> Delete(int id) {
+        public async Task<ActionResult<bool>> Delete(Guid id) {
             try {
                 var response = await _listService.Delete(id);
 

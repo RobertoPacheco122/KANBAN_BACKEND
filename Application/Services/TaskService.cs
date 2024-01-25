@@ -14,7 +14,7 @@ namespace Application.Services {
             _taskRepository = taskRepository;
         }
 
-        public async Task<bool> Delete(int id) {
+        public async Task<bool> Delete(Guid id) {
             return await _taskRepository.DeleteAsync(id);
         }
 
@@ -22,7 +22,7 @@ namespace Application.Services {
             return await _taskRepository.GetAllAsync();
         }
 
-        public async Task<TaskEntity> GetSingle(int id) {
+        public async Task<TaskEntity> GetSingle(Guid id) {
             return await _taskRepository.SelectAsync(id);
         }
 

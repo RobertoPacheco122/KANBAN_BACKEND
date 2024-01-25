@@ -14,7 +14,7 @@ namespace Application.Services {
             _userRepository = userRepository;
         }
 
-        public async Task<bool> Delete(int id) {
+        public async Task<bool> Delete(Guid id) {
             return await _userRepository.DeleteAsync(id);
         }
 
@@ -22,7 +22,7 @@ namespace Application.Services {
             return await _userRepository.GetAllAsync();
         }
 
-        public async Task<ApplicationUserEntity> GetSingle(int id) {
+        public async Task<ApplicationUserEntity> GetSingle(Guid id) {
             return await _userRepository.SelectAsync(id);
         }
 
