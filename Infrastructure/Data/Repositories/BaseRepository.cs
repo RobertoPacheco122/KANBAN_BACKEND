@@ -18,7 +18,7 @@ namespace Infrastructure.Data.Repositories {
             _dataset = _context.Set<T>();
         }
 
-        public async Task<bool> DeleteAsync(int id) {
+        public async Task<bool> DeleteAsync(Guid id) {
             try {
                 var entityInDatabase = await _dataset.FindAsync(id);
                 if (entityInDatabase == null) return false;
@@ -33,7 +33,7 @@ namespace Infrastructure.Data.Repositories {
             }
         }
 
-        public async Task<bool> ExistAsync(int id) {
+        public async Task<bool> ExistAsync(Guid id) {
             return await _dataset.AnyAsync(p => p.Id.Equals(id));
         }
 
@@ -63,7 +63,7 @@ namespace Infrastructure.Data.Repositories {
             }
         }
 
-        public async Task<T> SelectAsync(int id) {
+        public async Task<T> SelectAsync(Guid id) {
             try {
                 var entityInDatabase = await _dataset.FindAsync(id);
                 if (entityInDatabase == null) return null;
