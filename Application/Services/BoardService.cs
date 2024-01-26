@@ -8,10 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Services {
-    public class BoardService : IBoardService{
+    public class BoardService : IBoardService {
         private readonly IRepository<BoardEntity> _boardRepository;
-        public BoardService(IRepository<BoardEntity> boardRepository) {
+        private readonly IBoardRepository _specificBoardRepository;
+        public BoardService(IRepository<BoardEntity> boardRepository, IBoardRepository specificBoardRepository) {
             _boardRepository = boardRepository;
+            _specificBoardRepository = specificBoardRepository;
         }
 
         public async Task<bool> Delete(Guid id) {
@@ -20,6 +22,10 @@ namespace Application.Services {
 
         public async Task<List<BoardEntity>> GetAll() {
             return await _boardRepository.GetAllAsync();
+        }
+
+        public async Task<BoardEntity> GetRelatedDetails(Guid id) {
+            return await _specificBoardRepository.GetAllRelatedDetails(id);
         }
 
         public async Task<BoardEntity> GetSingle(Guid id) {
