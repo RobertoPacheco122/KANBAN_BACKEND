@@ -12,5 +12,6 @@ namespace Domain.Interfaces.Services {
         Task<BoardEntity> GetSingle(Guid id);
         Task<BoardEntity> Insert(BoardEntity board);
         Task<BoardEntity> Update(BoardEntity board);
+        Task<BoardEntity> GetRelatedDetails(Guid id);
     }
 }
