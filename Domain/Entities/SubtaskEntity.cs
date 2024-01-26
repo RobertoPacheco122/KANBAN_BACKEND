@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Domain.Entities {
@@ -10,6 +11,7 @@ namespace Domain.Entities {
         public bool IsDone { get; set; } = false;
 
         public Guid TaskId { get; set; }
+        [JsonIgnore]
         public TaskEntity? Task { get; set; }
     }
 }

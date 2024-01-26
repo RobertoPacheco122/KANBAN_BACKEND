@@ -23,6 +23,18 @@ namespace API.Controllers {
             }
         }
 
+        [HttpGet("related/{id}")]
+        public async Task<ActionResult<List<BoardEntity>>> GetAllRelatedDetails(Guid id) {
+            try {
+                var response = await _boardService.GetRelatedDetails(id);
+
+                return Ok(response);
+            }
+            catch (Exception ex) {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<BoardEntity>> GetSingle(Guid id) {
             try {

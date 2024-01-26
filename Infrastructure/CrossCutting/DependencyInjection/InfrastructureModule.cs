@@ -1,5 +1,6 @@
 ﻿using Domain.Interfaces.Repositories;
 using Infrastructure.Data.Context;
+using Infrastructure.Data.Implementations;
 using Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,7 @@ namespace Infrastructure.CrossCutting.DependencyInjection {
 
         private static IServiceCollection AddRepositories(this IServiceCollection services) {
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+            services.AddScoped<IBoardRepository, BoardImplementation>();
 
             services.AddDbContext<DataContext>(
                 options => options.UseNpgsql("Host=localhost;Port=5432;Database=kanbandddapi;Username=postgres;Password=fanta123")

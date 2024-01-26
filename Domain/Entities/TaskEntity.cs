@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Domain.Entities {
@@ -15,10 +16,10 @@ namespace Domain.Entities {
         public DateOnly? DoneDate { get; set; }
 
         public Guid ListId { get; set; }
+        [JsonIgnore]
         public ListEntity? List { get; set; }
         public List<ApplicationUserEntity>? Users { get; set; }
         public List<TagEntity>? Tags { get; set; }
         public List<SubtaskEntity>? Subtasks { get; set; }
-
     }
 }
