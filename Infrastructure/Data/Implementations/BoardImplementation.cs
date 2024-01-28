@@ -20,8 +20,8 @@ namespace Infrastructure.Data.Implementations {
         public async Task<BoardEntity> GetAllRelatedDetails(Guid id) {
             try {
                 var queryResult = await _dataset.
-                    Include(board => board.Lists)
-                        .ThenInclude(list => list.Tasks)
+                    Include(board => board.Lists.OrderBy(list => list.CreationDate))
+                        .ThenInclude(list => list.Tasks.OrderBy(task => task.CreationDate))
                             .ThenInclude(task => task.Users)
                                 .ThenInclude(user => user.Tasks)
                             .ThenInclude(task => task.Tags)
