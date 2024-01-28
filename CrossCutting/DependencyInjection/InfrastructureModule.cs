@@ -1,7 +1,7 @@
 ﻿using Domain.Interfaces.Repositories;
 using Infrastructure.Data.Context;
-using Infrastructure.Data.Implementations;
 using Infrastructure.Data.Repositories;
+using Infrastructure.Data.Implementations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -10,7 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.CrossCutting.DependencyInjection {
+
+namespace CrossCutting.DependencyInjection {
     public static class InfrastructureModule {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services) {
             services.AddRepositories();
