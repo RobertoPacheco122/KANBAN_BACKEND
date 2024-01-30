@@ -1,4 +1,6 @@
-﻿using Domain.Entities;
+﻿using AutoMapper;
+using Domain.DTOs.List;
+using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using System;
@@ -10,28 +12,41 @@ using System.Threading.Tasks;
 namespace Application.Services {
     public class ListService : IListService {
         private readonly IRepository<ListEntity> _listRepository;
-        public ListService(IRepository<ListEntity> listRepository) {
+        private readonly IMapper _mapper;
+
+        public ListService(IRepository<ListEntity> listRepository, IMapper mapper) {
             _listRepository = listRepository;
+            _mapper = mapper;
         }
 
         public async Task<bool> Delete(Guid id) {
             return await _listRepository.DeleteAsync(id);
         }
 
-        public async Task<List<ListEntity>> GetAll() {
-            return await _listRepository.GetAllAsync();
+        public async Task<List<ListDto>> GetAll() {
+            var entities = await _listRepository.GetAllAsync();
+
+            return _mapper.Map<List<ListDto>>(entities);
         }
 
-        public async Task<ListEntity> GetSingle(Guid id) {
-            return await _listRepository.SelectAsync(id);
+        public async Task<ListDto> GetSingle(Guid id) {
+            var entity = await _listRepository.SelectAsync(id);
+
+            return _mapper.Map<ListDto>(entity); 
         }
 
-        public async Task<ListEntity> Insert(ListEntity list) {
-            return await _listRepository.InsertAsync(list);
+        public async Task<ListDto> Insert(ListAddDto listDto) {
+            var dtoConvertedToEntity = _mapper.Map<ListEntity>(listDto);
+            var entity = await _listRepository.InsertAsync(dtoConvertedToEntity);
+
+            return _mapper.Map<ListDto>(entity);
         }
 
-        public async Task<ListEntity> Update(ListEntity list) {
-            return await _listRepository.UpdateAsync(list);
+        public async Task<ListDto> Update(ListUpdateDto listDto) {
+            var dtoConvertedToEntity = _mapper.Map<ListEntity>(listDto);
+            var entity = await _listRepository.UpdateAsync(dtoConvertedToEntity);
+
+            return _mapper.Map<ListDto>(entity); 
         }
     }
 }
