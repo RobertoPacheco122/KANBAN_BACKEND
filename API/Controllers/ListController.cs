@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.DTOs.List;
+using Domain.Entities;
 using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,7 +13,7 @@ namespace API.Controllers {
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ListEntity>>> GetAll() {
+        public async Task<ActionResult<List<ListDto>>> GetAll() {
             try {
                 var response = await _listService.GetAll();
 
@@ -24,7 +25,7 @@ namespace API.Controllers {
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ListEntity>> GetSingle(Guid id) {
+        public async Task<ActionResult<ListDto>> GetSingle(Guid id) {
             try {
                 var response = await _listService.GetSingle(id);
 
@@ -36,9 +37,9 @@ namespace API.Controllers {
         }
 
         [HttpPost]
-        public async Task<ActionResult<ListEntity>> Insert([FromBody] ListEntity list) {
+        public async Task<ActionResult<ListDto>> Insert([FromBody] ListAddDto listDto) {
             try {
-                var response = await _listService.Insert(list);
+                var response = await _listService.Insert(listDto);
 
                 return Ok(response);
             }
@@ -47,8 +48,8 @@ namespace API.Controllers {
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<ListEntity>> Update([FromBody] ListEntity list) {
+        [HttpPut]
+        public async Task<ActionResult<ListDto>> Update([FromBody] ListUpdateDto list) {
             try {
                 var response = await _listService.Update(list);
 
@@ -64,7 +65,9 @@ namespace API.Controllers {
             try {
                 var response = await _listService.Delete(id);
 
-                return NoContent();
+                if(response =! true) return BadRequest("Ocorreu um erro ao deletar a task");
+
+                return Ok(response);
             }
             catch (Exception ex) {
                 return BadRequest(ex.Message);
