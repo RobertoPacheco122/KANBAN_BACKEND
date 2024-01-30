@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.DTOs.List;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 namespace Domain.Interfaces.Services {
     public interface IListService {
         Task<bool> Delete(Guid id);
-        Task<List<ListEntity>> GetAll();
-        Task<ListEntity> GetSingle(Guid id);
-        Task<ListEntity> Insert(ListEntity list);
-        Task<ListEntity> Update(ListEntity list);
+        Task<List<ListDto>> GetAll();
+        Task<ListDto> GetSingle(Guid id);
+        Task<ListDto> Insert(ListAddDto listDto);
+        Task<ListDto> Update(ListUpdateDto listDto);
     }
 }
