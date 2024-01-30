@@ -1,4 +1,6 @@
+using AutoMapper;
 using CrossCutting.DependencyInjection;
+using CrossCutting.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,14 @@ builder.Services.AddCors(options => {
             .AllowAnyHeader();
     });
 });
+
+var autoMapperConfig = new AutoMapper.MapperConfiguration(config => {
+    config.AddProfile(new EntityToDtoProfile());
+});
+
+IMapper mapper = autoMapperConfig.CreateMapper();
+
+builder.Services.AddSingleton(mapper);
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 
