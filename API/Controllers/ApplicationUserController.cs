@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.DTOs.ApplicationUser;
+using Domain.Entities;
 using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,7 +13,7 @@ namespace API.Controllers {
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ApplicationUserEntity>>> GetAll() {
+        public async Task<ActionResult<List<ApplicationUserDto>>> GetAll() {
             try {
                 var response = await _userService.GetAll();
 
@@ -24,7 +25,7 @@ namespace API.Controllers {
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ApplicationUserEntity>> GetSingle(Guid id) {
+        public async Task<ActionResult<ApplicationUserDto>> GetSingle(Guid id) {
             try {
                 var response = await _userService.GetSingle(id);
 
@@ -36,9 +37,9 @@ namespace API.Controllers {
         }
 
         [HttpPost]
-        public async Task<ActionResult<ApplicationUserEntity>> Insert([FromBody] ApplicationUserEntity user) {
+        public async Task<ActionResult<ApplicationUserDto>> Insert([FromBody] ApplicationUserAddDto applicationUserAddDto) {
             try {
-                var response = await _userService.Insert(user);
+                var response = await _userService.Insert(applicationUserAddDto);
 
                 return Ok(response);
             }
@@ -47,10 +48,10 @@ namespace API.Controllers {
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<ApplicationUserEntity>> Update([FromBody] ApplicationUserEntity user) {
+        [HttpPut]
+        public async Task<ActionResult<ApplicationUserDto>> Update([FromBody] ApplicationUserUpdateDto applicationUserUpdateDto) {
             try {
-                var response = await _userService.Update(user);
+                var response = await _userService.Update(applicationUserUpdateDto);
 
                 return Ok(response);
             }

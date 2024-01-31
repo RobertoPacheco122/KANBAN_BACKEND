@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.DTOs.Board;
+using Domain.Entities;
 using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,7 +13,7 @@ namespace API.Controllers {
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<BoardEntity>>> GetAll() {
+        public async Task<ActionResult<List<BoardDto>>> GetAll() {
             try {
                 var response = await _boardService.GetAll();
 
@@ -36,7 +37,7 @@ namespace API.Controllers {
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<BoardEntity>> GetSingle(Guid id) {
+        public async Task<ActionResult<BoardDto>> GetSingle(Guid id) {
             try {
                 var response = await _boardService.GetSingle(id);
 
@@ -48,9 +49,9 @@ namespace API.Controllers {
         }
 
         [HttpPost]
-        public async Task<ActionResult<BoardEntity>> Insert([FromBody] BoardEntity board) {
+        public async Task<ActionResult<BoardDto>> Insert([FromBody] BoardAddDto boardAddDto) {
             try {
-                var response = await _boardService.Insert(board);
+                var response = await _boardService.Insert(boardAddDto);
 
                 return Ok(response);
             }
@@ -59,10 +60,10 @@ namespace API.Controllers {
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<BoardEntity>> Update([FromBody] BoardEntity board) {
+        [HttpPut]
+        public async Task<ActionResult<BoardDto>> Update([FromBody] BoardUpdateDto boardUpdateDto) {
             try {
-                var response = await _boardService.Update(board);
+                var response = await _boardService.Update(boardUpdateDto);
 
                 return Ok(response);
             }

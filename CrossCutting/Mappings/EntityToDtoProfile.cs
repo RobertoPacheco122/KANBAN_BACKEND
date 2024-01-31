@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Domain.DTOs.ApplicationUser;
+using Domain.DTOs.Board;
 using Domain.DTOs.List;
 using Domain.Entities;
 using System;
@@ -12,11 +14,23 @@ namespace CrossCutting.Mappings {
         public EntityToDtoProfile() {
             CreateMap<ListAddDto, ListEntity>()
                 .ReverseMap();
-
             CreateMap<ListUpdateDto, ListEntity>()
                 .ReverseMap();
-
             CreateMap<ListDto, ListEntity>()
+                .ReverseMap();
+
+            CreateMap<BoardAddDto, BoardEntity>()
+                .ReverseMap();
+            CreateMap<BoardUpdateDto, BoardEntity>()
+                .ReverseMap();
+            CreateMap<BoardDto, BoardEntity>()
+                .ReverseMap();
+
+            CreateMap<ApplicationUserAddDto, ApplicationUserEntity>()
+                .ReverseMap();
+            CreateMap<ApplicationUserUpdateDto, ApplicationUserEntity>()
+                .ReverseMap();
+            CreateMap<ApplicationUserDto, ApplicationUserEntity>()
                 .ReverseMap();
         }
     }
