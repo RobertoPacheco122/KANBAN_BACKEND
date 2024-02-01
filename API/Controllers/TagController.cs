@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.DTOs.Tag;
+using Domain.Entities;
 using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +25,7 @@ namespace API.Controllers {
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<TagEntity>> GetSingle(Guid id) {
+        public async Task<ActionResult<TagDto>> GetSingle(Guid id) {
             try {
                 var response = await _tagService.GetSingle(id);
 
@@ -36,9 +37,9 @@ namespace API.Controllers {
         }
 
         [HttpPost]
-        public async Task<ActionResult<TagEntity>> Insert([FromBody] TagEntity tag) {
+        public async Task<ActionResult<TagDto>> Insert([FromBody] TagAddDto tagAddDto) {
             try {
-                var response = await _tagService.Insert(tag);
+                var response = await _tagService.Insert(tagAddDto);
 
                 return Ok(response);
             }
@@ -47,10 +48,10 @@ namespace API.Controllers {
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<TagEntity>> Update([FromBody] TagEntity tag) {
+        [HttpPut]
+        public async Task<ActionResult<TagDto>> Update([FromBody] TagUpdateDto tagUpdateDto) {
             try {
-                var response = await _tagService.Update(tag);
+                var response = await _tagService.Update(tagUpdateDto);
 
                 return Ok(response);
             }
