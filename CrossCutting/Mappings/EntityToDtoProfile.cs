@@ -3,6 +3,7 @@ using Domain.DTOs.ApplicationUser;
 using Domain.DTOs.Board;
 using Domain.DTOs.List;
 using Domain.DTOs.Subtask;
+using Domain.DTOs.Tag;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,13 @@ namespace CrossCutting.Mappings {
             CreateMap<SubtaskUpdateDto, SubtaskEntity>()
                 .ReverseMap();
             CreateMap<SubtaskDto, SubtaskEntity>()
+                .ReverseMap();
+
+            CreateMap<TagAddDto, TagEntity>()
+                .ReverseMap();
+            CreateMap<TagUpdateDto, TagEntity>()
+                .ReverseMap();
+            CreateMap<TagDto, TagEntity>()
                 .ReverseMap();
         }
     }
