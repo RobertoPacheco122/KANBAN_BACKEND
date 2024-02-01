@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.DTOs.Task;
+using Domain.Entities;
 using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,7 +13,7 @@ namespace API.Controllers {
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<TaskEntity>>> GetAll() {
+        public async Task<ActionResult<List<TaskDto>>> GetAll() {
             try {
                 var response = await _taskService.GetAll();
 
@@ -24,7 +25,7 @@ namespace API.Controllers {
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<TaskEntity>> GetSingle(Guid id) {
+        public async Task<ActionResult<TaskDto>> GetSingle(Guid id) {
             try {
                 var response = await _taskService.GetSingle(id);
 
@@ -36,9 +37,9 @@ namespace API.Controllers {
         }
 
         [HttpPost]
-        public async Task<ActionResult<TaskEntity>> Insert([FromBody] TaskEntity task) {
+        public async Task<ActionResult<TaskDto>> Insert([FromBody] TaskAddDto taskAddDto) {
             try {
-                var response = await _taskService.Insert(task);
+                var response = await _taskService.Insert(taskAddDto);
 
                 return Ok(response);
             }
@@ -47,10 +48,10 @@ namespace API.Controllers {
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<TaskEntity>> Update([FromBody] TaskEntity task) {
+        [HttpPut]
+        public async Task<ActionResult<TaskDto>> Update([FromBody] TaskUpdateDto taskUpdateDto) {
             try {
-                var response = await _taskService.Update(task);
+                var response = await _taskService.Update(taskUpdateDto);
 
                 return Ok(response);
             }
