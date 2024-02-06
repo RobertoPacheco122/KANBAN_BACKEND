@@ -12,10 +12,16 @@ using System.Threading.Tasks;
 namespace Application.Services {
     public class TaskService : ITaskService {
         private readonly IRepository<TaskEntity> _taskRepository;
+        private readonly ITaskRepository _specificTaskRepository;
         private readonly IMapper _mapper;
 
-        public TaskService(IRepository<TaskEntity> taskRepository, IMapper mapper) {
+        public TaskService(
+            IRepository<TaskEntity> taskRepository, 
+            ITaskRepository specificTaskRepository,
+            IMapper mapper
+        ){
             _taskRepository = taskRepository;
+            _specificTaskRepository = specificTaskRepository;
             _mapper = mapper;
         }
 
@@ -27,6 +33,12 @@ namespace Application.Services {
             var entities = await _taskRepository.GetAllAsync();
 
             return _mapper.Map<List<TaskDto>>(entities);
+        }
+
+        public async Task<TaskEntity> GetRelatedDetails(Guid id) {
+            var entity = await _specificTaskRepository.GetAllRelatedDetails(id);
+
+            return entity;
         }
 
         public async Task<TaskDto> GetSingle(Guid id) {
@@ -44,7 +56,7 @@ namespace Application.Services {
 
         public async Task<TaskDto> Update(TaskUpdateDto taskUpdateDto) {
             var dtoToEntity = _mapper.Map<TaskEntity>(taskUpdateDto);
-            var entity = _mapper.Map<TaskDto>(dtoToEntity);
+            var entity = await _taskRepository.InsertAsync(dtoToEntity);
 
             return _mapper.Map<TaskDto>(entity);
         }

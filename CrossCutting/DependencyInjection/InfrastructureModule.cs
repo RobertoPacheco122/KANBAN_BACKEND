@@ -22,6 +22,7 @@ namespace CrossCutting.DependencyInjection {
         private static IServiceCollection AddRepositories(this IServiceCollection services) {
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             services.AddScoped<IBoardRepository, BoardImplementation>();
+            services.AddScoped<ITaskRepository, TaskImplementation>();
 
             services.AddDbContext<DataContext>(
                 options => options.UseNpgsql("Host=localhost;Port=5432;Database=kanbandddapi;Username=postgres;Password=fanta123")
