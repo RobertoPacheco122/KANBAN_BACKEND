@@ -24,6 +24,18 @@ namespace API.Controllers {
             }
         }
 
+        [HttpGet("related/{id}")]
+        public async Task<ActionResult<TaskEntity>> GetAllRelatedDetails(Guid id) {
+            try {
+                var response = await _taskService.GetRelatedDetails(id);
+
+                return Ok(response);
+            }
+            catch (Exception ex) {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<TaskDto>> GetSingle(Guid id) {
             try {
